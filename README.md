@@ -1,24 +1,3 @@
-# README
+# Odin Facebook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The challenge is to create a working facebook clone with the the underlying database and controller structures, but not the realtime notifications (i.e. backend focused).  It's a learning exercise set by [The Odin Project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project?ref=lnav).
