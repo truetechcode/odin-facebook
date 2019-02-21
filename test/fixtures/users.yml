@@ -6,9 +6,17 @@
 #
 jason:
   email: jason@example.com
+  name: jason
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   confirmed_at: <%= Time.now %>
 
 hodja:
   email: hodja@example.com
-  encrypted_password: <%= Devise::Encryptor.digest(User,'password') %>
+  name: hodja
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+yeti:
+  email: yeti@example.com
+  name: yeti
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.now %>

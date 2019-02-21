@@ -1,0 +1,20 @@
+<p>
+<%= link_to user.name, user_path(user) %>
+<% if current_user.sent_requests.find_by(requestee_id: user.id) %>
+<%= link_to 'Cancel Pending Friend Request' ,
+    friend_request_path(current_user.sent_requests.find_by(requestee_id: user.id)),
+    method: :delete,
+   class: "btn btn-outline-info"
+
+%>
+<% elsif current_user.received_requests.find_by(requestor_id: user.id) %>
+<button type="button" name="button" class = "btn btn-outline-success">
+Accept Friend Request
+</button>
+<% else %>
+  <%= form_for current_user.sent_requests.build do |f| %>
+    <%= hidden_field_tag :requestee_id, user.id %>
+    <%= f.submit 'Send Friend Request', class: 'btn btn-outline-primary' %>
+  <% end %>
+<% end %>
+</p>

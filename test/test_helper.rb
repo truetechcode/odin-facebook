@@ -14,6 +14,7 @@ class ActiveSupport::TestCase
   def assert_logged_out_links
     assert_select 'a[href=?]', new_user_session_path
     assert_select 'a[href=?]', new_user_registration_path
+    assert_select 'a[href=?]', users_path, count: 0
 
     assert_select 'a[href=?]', destroy_user_session_path, count: 0
   end
@@ -21,6 +22,7 @@ class ActiveSupport::TestCase
     assert_select 'a[href=?]', new_user_session_path, count: 0
     assert_select 'a[href=?]', new_user_registration_path, count: 0
 
+    assert_select 'a[href=?]', users_path
     assert_select 'a[href=?]', destroy_user_session_path
   end
 
@@ -29,5 +31,11 @@ class ActiveSupport::TestCase
     assert_select 'input[name=?]', 'user[password]'
     assert_select 'input[name=?]', 'user[remember_me]'
     assert_select 'input[type=?]', 'submit'
+  end
+
+  def getusers
+    @jason = users(:jason)
+    @hodja = users(:hodja)
+    @yeti = users(:yeti)
   end
 end

@@ -3,4 +3,6 @@ class FriendRequest < ApplicationRecord
   belongs_to :requestee, class_name: 'User'
 
   validates :requestor, uniqueness: { scope: :requestee}
+
+
 end

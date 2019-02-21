@@ -4,8 +4,7 @@ class UserSessionsTest < ActionDispatch::IntegrationTest
     include Devise::Test::IntegrationHelpers
 
    def setup
-     @jason = users(:jason)
-     @hodja = users(:hodja)
+     getusers
    end
 
 
