@@ -1,0 +1,6 @@
+<p>
+<%= link_to friend.name, user_path(friend) %> |
+<%= link_to 'Remove friend', friendship_path(
+      current_user.friendships.find_by(friend_id: friend.id)), method: :delete %>
+<%= gravatar_for friend, size:40 %>
+</p>

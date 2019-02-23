@@ -23,6 +23,7 @@ class ActiveSupport::TestCase
     assert_select 'a[href=?]', new_user_registration_path, count: 0
 
     assert_select 'a[href=?]', users_path
+    assert_select 'a[href=?]', friends_path
     assert_select 'a[href=?]', destroy_user_session_path
   end
 
@@ -37,5 +38,6 @@ class ActiveSupport::TestCase
     @jason = users(:jason)
     @hodja = users(:hodja)
     @yeti = users(:yeti)
+    @kirk = users(:kirk)
   end
 end

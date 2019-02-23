@@ -38,4 +38,10 @@ class FriendRequestsTest < ActionDispatch::IntegrationTest
     end
     assert_response :redirect
   end
+
+  test 'friend requests accept should point at creating a new friend' do
+    sign_in @jason
+    get users_path
+    assert_select "input[type=hidden][value=#{@yeti.id}]"
+  end
 end

@@ -1,6 +1,9 @@
 <p>
+<% if current_user.friends.find_by(id: user.id) %>
+<%= render partial: 'friends/friend', locals: {friend: user} %>
+<% elsif current_user.sent_requests.find_by(requestee_id: user.id) %>
 <%= link_to user.name, user_path(user) %>
-<% if current_user.sent_requests.find_by(requestee_id: user.id) %>
+<%= gravatar_for user, size:40 %>
 <%= link_to 'Cancel Pending Friend Request' ,
     friend_request_path(current_user.sent_requests.find_by(requestee_id: user.id)),
     method: :delete,
@@ -8,10 +11,16 @@
 
 %>
 <% elsif current_user.received_requests.find_by(requestor_id: user.id) %>
-<button type="button" name="button" class = "btn btn-outline-success">
-Accept Friend Request
-</button>
+  <%= link_to user.name, user_path(user) %>
+  <%= gravatar_for user, size:40 %>
+
+  <%= form_for current_user.friendships.build do |f| %>
+    <%= hidden_field_tag :friend_id , user.id %>
+    <%= f.submit 'Accept Friend Request', class: 'btn btn-outline-success' %>
+  <% end %>
 <% else %>
+  <%= link_to user.name, user_path(user) %>
+  <%= gravatar_for user, size:40 %>
   <%= form_for current_user.sent_requests.build do |f| %>
     <%= hidden_field_tag :requestee_id, user.id %>
     <%= f.submit 'Send Friend Request', class: 'btn btn-outline-primary' %>

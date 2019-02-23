@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :sent_requests, class_name: 'FriendRequest', foreign_key: 'requestor_id'
   has_many :received_requests, class_name: 'FriendRequest', foreign_key: 'requestee_id'
 
+  has_many :friendships
+  has_many :friends, through: :friendships, class_name: 'User'
+
   validates :name, length: {in: 3..255}
 
   def exists_request? user2

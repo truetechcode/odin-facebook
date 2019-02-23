@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+jason_kirk:
+  user: jason
+  friend: kirk
+
+kirk_jason:
+  user: kirk
+  friend: jason
+
+jason_spock:
+  user: jason
+  friend: spock
+
+spock_jason:
+  user: spock
+  friend: jason

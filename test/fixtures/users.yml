@@ -6,17 +6,29 @@
 #
 jason:
   email: jason@example.com
-  name: jason
+  name: Jason
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   confirmed_at: <%= Time.now %>
 
 hodja:
   email: hodja@example.com
-  name: hodja
+  name: Hodja
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
 
 yeti:
   email: yeti@example.com
-  name: yeti
+  name: Yeti
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.now %>
+
+kirk:
+  email: kirk@federation.com
+  name: Kirk
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.now %>
+
+spock:
+  email: spock@federation.com
+  name: Spock
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   confirmed_at: <%= Time.now %>

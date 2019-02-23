@@ -15,6 +15,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_select 'a[href=?]', user_path(@hodja)
 
+    assert_select 'a[href=?]', user_path(@jason), count: 0
+
     sign_out @jason
 
     get users_url
@@ -24,6 +26,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'a[href=?]', user_path(@hodja), count:0
+
+  end
+
+  test 'show user name on page' do
+    get user_url(@hodja)
+
+    assert_match @hodja.name, response.body
 
   end
 

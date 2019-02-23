@@ -1,14 +1,8 @@
 class FriendRequestsController < ApplicationController
+  include FriendRequestsHelper
   before_action :authenticate_user!
   def create
-    request =
-      current_user.sent_requests.build(requestee_id: params[:requestee_id])
-    if request.save
-      flash[:notice] = 'Friend request sent!'
-    else
-      flash[:error] = "Friend request couldn't be sent:
-        #{request.errors.full_messages}"
-    end
+    new_friend_request(params[:requestee_id])
     redirect_to users_path
   end
 
