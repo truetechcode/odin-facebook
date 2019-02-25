@@ -1,43 +1,83 @@
+<% provide(:title,'Profile') %>
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<div class="row">
+<div class="col-md-6">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+  html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",
+    class: 'form-control' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autocomplete: "name",
+    class: 'form-control' %>
+  </div>
+
+
+  <div class="form-group">
+
+    <%= f.label :password %>
+    <small  class='form-text-inline'>
+      <i>leave blank if you don't want to change it</i>
+    </small>
+    <%= f.password_field :password, autocomplete: "new-password",
+    class: 'form-control' %>
+    <small id= "passwordHelp" class='form-text'>
     <% if @minimum_password_length %>
-      <br />
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
+    </small>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="form-group">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password",
+    class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  <div class="form-group">
+    <%= f.label :current_password %>
+    <%= f.password_field :current_password, autocomplete: "current-password",
+    class: 'form-control' %>
+    <small id= "current_passwordHelp" class='form-text'>
+      We need your current password to confirm your changes
+    </small>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: 'btn btn-primary'  %>
   </div>
 <% end %>
+</div>
+<div class="col-md-6">
+  <div class="change-gravatar">
+    <h5>Gravatar</h5>
+    <%= gravatar_for @user, size:60 %>
+    <a href="http://gravatar.com/emails" target="_blank" rel='noopener'>
+      change </a> <br>
+    <small id= "gravatarHelp" class='form-text'>
+      Gravatars are controlled by an external website - you can reuse your Gravatar on other websites.  Changing the Gravatar will take you to an external site.
+    </small>
+  </div>
+<div class="cancel-form">
 
-<h3>Cancel my account</h3>
+<h5>Cancel my account</h5>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name),
+  data: { confirm: "Are you sure?" }, class: 'btn btn-warning' , method: :delete%></p>
+</div>
 
+</div>
+</div>
 <%= link_to "Back", :back %>

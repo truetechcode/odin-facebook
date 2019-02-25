@@ -25,6 +25,7 @@ class ActiveSupport::TestCase
     assert_select 'a[href=?]', users_path
     assert_select 'a[href=?]', friends_path
     assert_select 'a[href=?]', destroy_user_session_path
+    assert_select 'a[href=?]', edit_user_registration_path
   end
 
   def assert_login_form

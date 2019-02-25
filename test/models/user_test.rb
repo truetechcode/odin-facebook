@@ -11,4 +11,28 @@ class UserTest < ActiveSupport::TestCase
     assert @jason.exists_request?(@yeti)
     assert @yeti.exists_request?(@jason)
   end
+
+  test 'user with related objects can be deleted' do
+    assert_difference 'User.count', -1 do
+      @jason.destroy
+    end
+  end
+
+  test 'deleting user causes friendship to be deleted' do
+    friendship_id = Friendship.find_by(friend: @kirk, user: @jason).id
+    @kirk.destroy
+    assert_nil Friendship.find_by(id: friendship_id)
+  end
+
+  test 'deleting user causes friendship to be deleted 2' do
+    friendship_id = Friendship.find_by(friend: @kirk, user: @jason).id
+    @jason.destroy
+    assert_nil Friendship.find_by(id: friendship_id)
+  end
+
+  test 'deleting user causes friend request to be deleted' do
+    request_id = FriendRequest.find_by(requestee: @jason, requestor: @yeti ).id
+    @yeti.destroy
+    assert_nil FriendRequest.find_by(id: request_id)
+  end
 end

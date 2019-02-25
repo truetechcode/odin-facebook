@@ -5,10 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
 
-  has_many :sent_requests, class_name: 'FriendRequest', foreign_key: 'requestor_id'
-  has_many :received_requests, class_name: 'FriendRequest', foreign_key: 'requestee_id'
+  has_many :sent_requests, class_name: 'FriendRequest',
+    foreign_key: 'requestor_id', dependent: :destroy
+  has_many :received_requests, class_name: 'FriendRequest',
+    foreign_key: 'requestee_id', dependent: :destroy
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, class_name: 'User'
 
   validates :name, length: {in: 3..255}
