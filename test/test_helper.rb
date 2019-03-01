@@ -41,4 +41,10 @@ class ActiveSupport::TestCase
     @yeti = users(:yeti)
     @kirk = users(:kirk)
   end
+
+  def getposts
+    @post1 = posts(:first)
+    @post2 = posts(:second)
+    @post3 = posts(:third)
+  end
 end

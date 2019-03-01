@@ -4,6 +4,9 @@ class UserTest < ActiveSupport::TestCase
 
   def setup
     getusers
+    @post1 = posts(:first)
+    @post2 = posts(:second)
+    @post3 = posts(:third)
   end
 
   test 'exists_request returns true only if there is an existing friend request' do
@@ -35,4 +38,26 @@ class UserTest < ActiveSupport::TestCase
     @yeti.destroy
     assert_nil FriendRequest.find_by(id: request_id)
   end
+
+  test 'deleting user causes post author to be nullified ' do
+    post_id = Post.find_by(author: @jason)
+    @jason.destroy
+    p = Post.find_by(id: post_id)
+    assert_not_nil p
+    assert_nil p.author
+  end
+
+  test 'can see own posts in feed' do
+    assert_includes(@jason.feed, @post1 )
+  end
+
+  test 'can see friends posts in feed' do
+    assert_includes(@jason.feed, @post2)
+  end
+
+  test 'cant see non friend posts in feed' do
+    assert_not_includes(@jason.feed, @post3)
+  end
+
+
 end

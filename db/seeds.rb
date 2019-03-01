@@ -39,3 +39,9 @@ kirk.friends << jason
 User.all.each do |user|
   jason2.friends << user
 end
+
+25.times do
+  User.all.each do |user|
+    user.posts.create!(body: Faker::Lorem.paragraph(4,false,15))
+  end
+end
