@@ -42,11 +42,11 @@ class PostTest < ActiveSupport::TestCase
     end
   end
 
-  test 'Post preview cuts off posts with more than 20 characters' do
-    assert_match((@post3.body[0...20] + "..."), @post3.preview)
+  test 'Post preview cuts off posts with more than specified characters' do
+    assert_match((@post3.body[0...20] + "..."), @post3.preview(letters:20))
   end
 
-  test 'Post preview shows posts with less than 20 characters' do
-    assert_match @post1.body, @post1.preview
+  test 'Post preview shows posts with less than specified characters' do
+    assert_match @post1.body, @post1.preview(letters:20)
   end
 end

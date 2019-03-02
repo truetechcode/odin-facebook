@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+//Flash notices
 div.alert-alert {
   background-color: #FAA;
 }
@@ -7,6 +8,8 @@ div.alert-alert {
 div.alert-notice {
   background-color: #ACF;
 }
+
+//Forms
 div.form-errors {
   padding: 7px 7px 1px 7px;
 }
@@ -16,10 +19,45 @@ div.change-gravatar {
   border-top: 1px dashed grey;
   border-bottom: 1px dashed grey;
 }
-.btn-primary {
+
+//Feed
+div.post-preview {
+  padding: 10px 5px;
+}
+
+//User Profile
+
+div.right-hand {
+  float: right;
+}
+
+.gravatar-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding: 5px;
+}
+.cleared {
+  clear: both;
+}
+
+.btn-primary, .btn-outline-danger, .btn-outline-info, .btn-outline-primary,
+.btn-outline-success {
   width: 100%;
 }
 
 div.cancel-form {
   padding: 20px 0 0 0;
+}
+
+div.user-text {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  text-align: center;
+}
+nav {
+  width: 100%;
 }

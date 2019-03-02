@@ -13,7 +13,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    assert_select 'a[href=?]', user_path(@hodja)
+    assert_select 'a[href=?]', user_path(@kirk)
 
     assert_select 'a[href=?]', user_path(@jason), count: 0
 
@@ -30,9 +30,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'show user name on page' do
-    get user_url(@hodja)
+    get user_url(@kirk)
 
-    assert_match @hodja.name, response.body
+    assert_match @kirk.name, response.body
 
   end
 

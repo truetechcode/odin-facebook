@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, class_name: 'User'
   has_many :posts, foreign_key: 'author_id', dependent: :nullify
+  has_many :comments, foreign_key: 'author_id', dependent: :nullify
 
   validates :name, length: {in: 3..255}
 
@@ -24,5 +25,29 @@ class User < ApplicationRecord
   def feed
     Post.where('author_id in (SELECT friend_id FROM friendships WHERE
       user_id = :user) or author_id = :user', user: self.id).order(created_at: :desc)
+  end
+
+  def member_since
+    created_at.strftime("#{created_at.day.ordinalize} %b %Y")
+  end
+
+  def last_activity
+    last_activity_date =  Post.find_by_sql("
+      SELECT max(updated_at) AS updated_at
+      FROM posts
+      WHERE author_id = #{id}
+      ")[0].updated_at
+
+    last_activity_date.strftime("#{last_activity_date.day.ordinalize} %b %Y")
+  end
+
+  def not_friend_list
+    User.all.where('id <> :user AND
+      id NOT IN (SELECT friend_id FROM friendships WHERE user_id = :user)',
+      user: id)
+  end
+
+  def last_post
+    posts.last
   end
 end

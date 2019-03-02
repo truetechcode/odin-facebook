@@ -1,3 +1,44 @@
 <% provide(:title,@user.name) %>
 
 <h1><%= @user.name %></h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="gravatar-center">
+      <%= gravatar_for @user, size: 90 %>
+    </div>
+    <div class="cleared">
+    </div>
+    Name:
+    <div class="right-hand">
+      <%= @user.name %>
+    </div><br>
+    <div class="cleared">
+    </div>
+    Email:
+    <div class="right-hand">
+      <%= @user.email %>
+    </div><br>
+
+    <div class="cleared">
+    </div>
+    Member since:
+    <div class="right-hand">
+      <%= @user.member_since %>
+    </div><br>
+    <div class="cleared">
+    </div>
+    Last Activity:
+    <div class="right-hand">
+           <%= @user.last_activity %>
+    </div><br>
+    <%= link_to 'Remove friend', friendship_path(
+          current_user.friendships.find_by(friend_id: @user.id)), method: :delete,
+          data: {confirm: 'Are you sure?'},
+          class: "btn btn-outline-danger btn-sm" %>
+
+  </div>
+  <div class="col-md-6">
+    <%= render 'shared/feed' %>
+  </div>
+</div>

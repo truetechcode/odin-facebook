@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :confirm_author, only: [:edit, :update, :destroy]
-
+  before_action :new_post, only: [:index, :new]
   # GET /posts
   def index
     if !(user = params[:user_id]&.to_i)
@@ -19,14 +19,13 @@ class PostsController < ApplicationController
   def show
     author = @post.author
     unless current_user == author || current_user.friends.include?(author)
-      flash[:warning] = "You must be friends with #{author} before viewing their posts."
-      redirect_to post_url
+      flash[:warning] = "You must be friends with #{author || 'them'} before viewing their posts."
+      redirect_to posts_url
     end
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
   end
 
   # GET /posts/1/edit
@@ -35,8 +34,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
+    @post = current_user.posts.build(post_params)
       if @post.save
         redirect_to @post, notice: 'Post was successfully created.'
       else
@@ -66,9 +64,8 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.fetch(:post, {}).permit(:author_id,:body)
+    def new_post
+      @post = Post.new
     end
 
     def confirm_author
@@ -77,4 +74,11 @@ class PostsController < ApplicationController
         redirect_to root_url
       end
     end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def post_params
+      params.fetch(:post, {}).permit(:author_id,:body)
+    end
+
+
+
 end

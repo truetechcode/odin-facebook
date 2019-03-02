@@ -1,4 +1,29 @@
 <% provide(:title,'Users') %>
+<h1>All Users</h1>
 
-<h1>Users</h1>
-<%= render @users %>
+<div class="row">
+  <div class="offset-md-1 col-md-3">
+    <h4>Friends</h4>
+
+    <%= will_paginate @friends, list_classes: %w(pagination justify-content-center),
+    inner_window: 2, outer_window: 0, param_name: :friends_page %>
+
+    <%= render @friends %>
+
+    <%= will_paginate @friends, list_classes: %w(pagination justify-content-center),
+     inner_window: 2, outer_window: 0 , param_name: :friends_page  %>
+  </div>
+
+  <div class="offset-md-3 col-md-3">
+    <h4>Potential Friends</h4>
+    <%= will_paginate @users, list_classes: %w(pagination justify-content-center),
+    page_links: false , param_name: :users_page %>
+
+    <%= render @users %>
+
+    <%= will_paginate @users, list_classes: %w(pagination justify-content-center),
+    page_links: false, param_name: :users_page %>
+  </div>
+
+
+</div>

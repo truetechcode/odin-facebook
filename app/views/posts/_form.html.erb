@@ -1,7 +1,7 @@
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_with(model: post, local: true, url: yield(:submit_link)) do |form| %>
   <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <div id="error_explanation" class = 'alert-danger form-errors'>
+      <h6><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h6>
 
       <ul>
       <% post.errors.full_messages.each do |message| %>

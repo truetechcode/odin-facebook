@@ -45,3 +45,10 @@ end
     user.posts.create!(body: Faker::Lorem.paragraph(4,false,15))
   end
 end
+
+5.times do
+  Post.all.each do |post|
+    commentator = post.author.friends.order("RANDOM()").first
+    post.comments.create!(body: Faker::Lorem.sentence, author_id: commentator.id)
+  end
+end

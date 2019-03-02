@@ -15,6 +15,10 @@ third:
   author: hodja
   created_at: <%= 3.hours.ago %>
 
+author_less:
+  body: The quick brown fox jumped over the lazy dogs haha
+  created_at: <%= 3.years.ago %>
+
 <% 60.times do |i| %>
 
 post_<%= i %>:

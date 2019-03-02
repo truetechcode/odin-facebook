@@ -1,0 +1,21 @@
+
+<%= will_paginate(@posts, inner_window: 2, outer_window:0) %>
+  <% @posts.each do |post| %>
+    <div class="post-preview">
+      <div class="row">
+        <div class="col-md-2">
+          <%= link_to post.author do %>
+            <%= gravatar_for post.author, size:30 %> <br>
+            <small><%= post.author.name %></small>
+          <% end %>
+        </div>
+        <div class="offset-md-1 col-md-9">
+          <%= post.preview %><br>
+          <%= link_to post do %>
+            more
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<%= will_paginate(@posts, inner_window: 1, outer_window:0) %>
