@@ -1,11 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  body: MyText
-  post: 
-  author: 
+  body: This is a comment
+  post: first
+  author: jason
 
 two:
-  body: MyText
-  post: 
+  body: Also a comment
+  post: first
+  author: kirk
+
+three:
+  body: Probably a comment as well
+  post: second
   author: 

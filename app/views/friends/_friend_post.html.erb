@@ -1,5 +1,6 @@
 <p>
   <div class="row">
+    <div class="offset-md-1 col-md-3">
       <div class="user-text">
         <%= link_to friend.name, user_path(friend) %>
         <%= gravatar_for friend, size:40 %> <br>
@@ -9,6 +10,19 @@
             current_user.friendships.find_by(friend_id: friend.id)), method: :delete,
             data: {confirm: 'Are you sure?'},
             class: "btn btn-outline-danger btn-sm" %>
+    </div>
+    <div class="col-md-6">
+      <div class="user-text">
+        <% if(last_post = friend.last_post) %>
+          <%= last_post.preview %><br>
+          <%= link_to last_post do %>
+            see post
+          <% end %>
+          |
+          <%= link_to "more posts by #{friend.name}", user_posts_path(friend) %>
+        <% end %>
+      </div>
+    </div>
 
 
   </div>

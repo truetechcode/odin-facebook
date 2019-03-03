@@ -7,7 +7,8 @@ class PostsController < ApplicationController
   def index
     if !(user = params[:user_id]&.to_i)
       @posts = current_user.feed.paginate(page: params[:page])
-    elsif (user == current_user.id) || (current_user.friends.include?(user))
+    elsif (user == current_user.id) ||
+      (current_user.friends.include?(User.find_by_id(user)))
       @posts = Post.where(author_id: user).paginate(page: params[:page])
     else
       flash.now[:warning] = "You can only see your and your friends' posts."
