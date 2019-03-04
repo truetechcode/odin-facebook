@@ -18,13 +18,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    author = @post.author
-    unless current_user == author || current_user.friends.include?(author)
-      flash[:warning] = "You must be friends with #{author || 'them'} before viewing their posts."
-      redirect_to posts_url
-    end
-    @comments = @post.comments.order(:created_at).paginate(page: params[:page]).per_page(10)
-    @new_comment = Comment.new(author: current_user)
+    show_post
   end
 
   # GET /posts/new

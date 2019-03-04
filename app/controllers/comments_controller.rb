@@ -20,7 +20,9 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully created.'
     else
-      render :new
+      flash[:warning] = 'Comment not created'
+      #redirect_to @post
+      show_post(@comment)
     end
   end
 
