@@ -8,13 +8,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = Post.where(author_id: @user).paginate(page: params[:page],
-      per_page:10)
 
-    unless current_user.friends.include? @user
+    unless current_user.friends.include?(@user) || current_user == @user
       flash[:warning] = "You can only see your friends' profiles"
       redirect_to root_url
     end
+
+    @posts = Post.where(author_id: @user).paginate(page: params[:page],
+      per_page:10)
   end
 
 

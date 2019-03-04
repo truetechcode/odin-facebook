@@ -32,10 +32,14 @@
     <div class="right-hand">
            <%= @user.last_activity %>
     </div><br>
-    <%= link_to 'Remove friend', friendship_path(
-          current_user.friendships.find_by(friend_id: @user.id)), method: :delete,
-          data: {confirm: 'Are you sure?'},
-          class: "btn btn-outline-danger btn-sm" %>
+    <% if current_user == @user %>
+      <%= link_to 'Edit Profile', edit_user_registration_path(current_user) %>
+    <% else %>
+      <%= link_to 'Remove friend', friendship_path(
+            current_user.friendships.find_by(friend_id: @user.id)), method: :delete,
+            data: {confirm: 'Are you sure?'},
+            class: "btn btn-outline-danger btn-sm" %>
+    <% end %>
 
   </div>
   <div class="col-md-6">

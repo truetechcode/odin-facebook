@@ -47,4 +47,11 @@ class ActiveSupport::TestCase
     @post2 = posts(:second)
     @post3 = posts(:third)
   end
+
+  def getcomments
+    @comment1 = comments(:one)
+    @comment2 = comments(:two)
+    @comment3 = comments(:three)
+
+  end
 end

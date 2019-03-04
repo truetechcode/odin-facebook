@@ -1,0 +1,25 @@
+  <div class="comment">
+    <div class="row">
+      <div class="offset-md-2 col-md-2">
+        <% if author = comment.author %>
+          <%= link_to author do %>
+            <%= gravatar_for author, size:30 %> <br>
+            <small><%= author.name %></small>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-8">
+        <% if comment.new_record? %>
+          <%= provide(:submit_link, post_comments_path(@post)) %>
+          <%= render 'comments/form', comment: comment %>
+        <% else %>
+          <%= comment.body %>
+          <% if current_user == comment.author %>
+            <%= link_to 'edit', edit_comment_path(comment) %>
+             |
+            <%= link_to 'delete', comment_path(comment), method: :delete %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>

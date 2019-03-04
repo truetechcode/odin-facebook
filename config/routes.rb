@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     resources :posts, only: [:index, :new, :create]
   end
-  resources :posts, except: [:new, :create]
+  resources :posts, except: [:new, :create] do
+    resources :comments, only: [  :create]
+  end
+  resources :comments, except: [:index, :new, :create, :show]
   resources :friend_requests, only: [:index, :create, :destroy]
   resources :friendships, only: [:index, :create, :destroy]
   get 'friends' => 'friendships#index'

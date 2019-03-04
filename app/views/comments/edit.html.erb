@@ -1,0 +1,8 @@
+<h1>Editing Comment</h1>
+<%= provide(:title, 'Edit Comment') %>
+<%= provide(:submit_link, comment_path()) %>
+
+<%= render 'form', comment: @comment %>
+
+<%= link_to 'Show', @comment %> |
+<%= link_to 'See Post', post_path(@comment.post) %>

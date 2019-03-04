@@ -50,4 +50,9 @@ class PostsTest < ActionDispatch::IntegrationTest
     assert_redirected_to posts_path
   end
 
+  test 'edit form submits to correct path' do
+    sign_in @jason
+    get edit_post_path(@post1)
+    assert_select 'form[action=?]', post_path
+  end
 end

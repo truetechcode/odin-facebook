@@ -27,6 +27,13 @@ class UserPageTest < ActionDispatch::IntegrationTest
 
   end
 
+  test 'can get own user page' do
+    sign_in @jason
+    get user_path @jason
+    assert_response :success
+    assert_select 'a[href=?]', edit_user_registration_path(@jason)
+  end
+
   test 'should not display link of non friends on user index' do
     sign_in @jason
     get users_path
