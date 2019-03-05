@@ -22,7 +22,7 @@ hodja = User.create!(name:'Hodja', email: 'hodja@example.com', password:'passwor
 kirk = User.create!(name:'Kirk', email: 'kirk@example.com', password: 'password',
             password_confirmation: 'password', confirmed_at: Time.now)
 
-100.times do |i|
+45.times do |i|
   first_name = Faker::Name.first_name
   name = first_name + Faker::Name.last_name
   email = "#{first_name}#{i}@example.com"
@@ -40,7 +40,7 @@ User.all.each do |user|
   jason2.friends << user
 end
 
-25.times do
+21.times do
   User.all.each do |user|
     user.posts.create!(body: Faker::Lorem.paragraph(4,false,15))
   end
