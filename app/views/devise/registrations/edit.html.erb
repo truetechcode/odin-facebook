@@ -47,6 +47,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar, class: 'form-control' %>
+    <small id= "avatar_help" class='form-text'>
+      Upload a photo to use as your avatar instead of your gravatar.  You can only use the photo on this site.
+    </small>
+  </div>
+  <div class="form-group">
     <%= f.label :current_password %>
     <%= f.password_field :current_password, autocomplete: "current-password",
     class: 'form-control' %>
@@ -54,7 +61,7 @@
       We need your current password to confirm your changes
     </small>
   </div>
-
+  
   <div class="actions">
     <%= f.submit "Update", class: 'btn btn-primary'  %>
   </div>
@@ -68,8 +75,12 @@
       change </a> <br>
     <small id= "gravatarHelp" class='form-text'>
       Gravatars are controlled by an external website - you can reuse your Gravatar on other websites.  Changing the Gravatar will take you to an external site.
+      Gravatars are only used if you don't have your own avatar.
     </small>
+
   </div>
+
+
 <div class="cancel-form">
 
 <h5>Cancel my account</h5>
