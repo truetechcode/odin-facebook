@@ -1,4 +1,19 @@
 <% provide(:title,'Home') %>
 
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1>Welcome to OdinBook</h1>
+<p>
+  Odin book is a learning application by Jason McKee.  That is I wrote it to
+  help learn how to code in Ruby on Rails.  It is based on
+  <a href="https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project?ref=lnav">
+  this assignment</a> by the Odin project.
+</p>
+
+<p>You're welcome to have a play around.  It is fully functional, except the facebook
+login is still in sandbox mode so won't work for other users (it works for me).  Apart from this you should be able to sign up, login and out, make friends, post and comment without problem</p>
+<p>
+If you like this project the original code is on
+<a href=" https://github.com/jttmckee/odin-facebook">Github</a>
+</p>
+
+<%= link_to 'Sign Up Here!', new_user_registration_path,
+  class: 'btn btn-primary btn-lg btn-block' %>
