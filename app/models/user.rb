@@ -38,8 +38,11 @@ class User < ApplicationRecord
       FROM posts
       WHERE author_id = #{id}
       ")[0].updated_at
-
-    last_activity_date.strftime("#{last_activity_date.day.ordinalize} %b %Y")
+    if last_activity_date
+      last_activity_date.strftime("#{last_activity_date.day.ordinalize} %b %Y")
+    else
+      updated_at.strftime("#{updated_at.day.ordinalize} %b %Y")
+    end
   end
 
   def not_friend_list
@@ -51,6 +54,7 @@ class User < ApplicationRecord
   def last_post
     posts.last
   end
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -59,5 +59,16 @@ class UserTest < ActiveSupport::TestCase
     assert_not_includes(@jason.feed, @post3)
   end
 
+  test 'last activity date returns last post created' do
+    assert_equal(@kirk.last_activity,
+      @post2.created_at.strftime("#{@post2.created_at.day.ordinalize} %b %Y")
+      )
+  end
+
+  test 'last activity date returns user created if no action' do
+    assert_equal(@yeti.last_activity,
+      @yeti.created_at.strftime("#{@yeti.created_at.day.ordinalize} %b %Y")
+     )
+  end
 
 end
