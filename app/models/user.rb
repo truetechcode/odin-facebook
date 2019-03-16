@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, class_name: 'User'
   has_many :posts, foreign_key: 'author_id', dependent: :nullify
+  has_many :pics, foreign_key: 'author_id', dependent: :nullify
   has_many :comments, foreign_key: 'author_id', dependent: :nullify
   has_one_attached :avatar
 
@@ -26,6 +27,11 @@ class User < ApplicationRecord
 
   def feed
     Post.where('author_id in (SELECT friend_id FROM friendships WHERE
+      user_id = :user) or author_id = :user', user: self.id).order(created_at: :desc)
+  end
+
+  def pics_feed
+    Pic.where('author_id in (SELECT friend_id FROM friendships WHERE
       user_id = :user) or author_id = :user', user: self.id).order(created_at: :desc)
   end
 

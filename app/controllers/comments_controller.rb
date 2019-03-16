@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :set_post, only: [:create]
+  before_action :set_post_or_pic, only: [:create]
   before_action :confirm_commentable, only: [:create]
   before_action :confirm_author, only: [:edit, :update, :destroy]
 
@@ -15,21 +15,27 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.author = current_user
-    @comment.post = @post
+    @comment.commentable = @commentable
 
     if @comment.save
-      redirect_to @post, notice: 'Comment was successfully created.'
+      redirect_to @commentable, notice: 'Comment was successfully created.'
     else
       flash[:warning] = 'Comment not created'
       #redirect_to @post
-      show_post(@comment)
+      if @commentable.class = Post
+        show_post(@comment)
+      elsif @commentable.class = Pic
+        show_pic(@comment)
+      else
+        flash[:warning] = 'Can only create a comment for a post or pic.'
+      end
     end
   end
 
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.post, notice: 'Comment was successfully updated.'
+      redirect_to @comment.commentable, notice: 'Comment was successfully updated.'
     else
       render :edit
     end
@@ -37,9 +43,9 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
-    post = @comment.post
+    commentable = @comment.commentable
     @comment.destroy
-    redirect_back fallback_location: post_path(post),
+    redirect_back fallback_location: commentable,
       notice: 'Comment was successfully destroyed.'
   end
 
@@ -54,13 +60,18 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:body)
     end
 
-    def set_post
-      @post = Post.find_by_id(params[:post_id])
+    def set_post_or_pic
+      if post_id = params[:post_id]
+        @commentable = Post.find_by_id(post_id)
+      elsif pic_id = params[:pic_id]
+        @commentable = Pic.find_by_id(pic_id)
+      end
     end
+
     def confirm_commentable
-      author = @post.author
-      unless @post.author  == current_user ||
-        @post.author.friends.include?(current_user)
+      author = @commentable.author
+      unless @commentable.author  == current_user ||
+        @commentable.author.friends.include?(current_user)
         flash[:warning] =
           "You can only comment on your posts and your friend's posts"
         redirect_to posts_path
@@ -69,7 +80,7 @@ class CommentsController < ApplicationController
     def confirm_author
       unless @comment.author == current_user
         flash[:warning] = 'You can only edit and delete your own comments'
-        redirect_to post_path(@comment.post)
+        redirect_to @comment.commentable
       end
     end
 end

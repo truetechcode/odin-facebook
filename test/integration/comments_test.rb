@@ -121,4 +121,11 @@ class CommentsTest < ActionDispatch::IntegrationTest
     get post_path(@post1)
     assert_match old_body, response.body
   end
+
+  test 'no comments renders correctly' do
+    empty_comments =  'Create Comment'
+    sign_in @jason
+    get post_path(posts(:post_7))
+    assert_match empty_comments, response.body
+  end
 end

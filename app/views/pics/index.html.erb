@@ -1,0 +1,20 @@
+<%= provide(:title, 'Pics') %>
+<%= provide(:submit_link, user_posts_path(current_user)) %>
+
+
+<h1>Pics</h1>
+<div class="row">
+  <div class="col-md-7">
+    <%= render 'shared/feed', feed_objects: @pics %>
+  </div>
+
+  <div class="col-md-5">
+    <%= render 'posts/form', post: @post %>
+    <br><br>
+    <%= render 'form', pic: @pic%>
+  </div>
+</div>
+
+
+
+<br>

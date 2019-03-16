@@ -61,9 +61,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def new_post
-      @post = Post.new
-    end
+
 
     def confirm_author
       unless @post.author == current_user

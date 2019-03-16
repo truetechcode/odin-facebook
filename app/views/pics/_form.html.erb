@@ -1,0 +1,14 @@
+<%= form_with(model: pic, local: true, url: user_pics_path(current_user)) do |f| %>
+  <%= render 'shared/errors', object: pic %>
+  <div class="form-group">
+    <%= f.file_field :image, class: 'form-control' %>
+    <small id= "pic_help" class='form-text'>
+      Upload a picture instead of a post.
+    </small>
+
+  </div>
+
+  <div class="actions">
+    <%= f.submit  class: 'btn btn-primary'%>
+  </div>
+<% end %>

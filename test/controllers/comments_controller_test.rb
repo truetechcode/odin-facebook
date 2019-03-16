@@ -24,7 +24,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "should update comment" do
     sign_in @jason
     patch comment_url(@comment), params: { comment: {  body: 'Testing' } }
-    assert_redirected_to post_path(@comment.post)
+    assert_redirected_to post_path(@comment.commentable)
   end
 
   test "should destroy comment" do

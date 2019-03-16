@@ -5,11 +5,13 @@
 <h1>Posts</h1>
 <div class="row">
   <div class="col-md-7">
-    <%= render 'shared/feed' %>
+    <%= render 'shared/feed', feed_objects: @posts %>
   </div>
 
   <div class="col-md-5">
     <%= render 'form', post: @post %>
+    <br><br>
+    <%= render 'pics/form', pic: @pic%>
   </div>
 </div>
 

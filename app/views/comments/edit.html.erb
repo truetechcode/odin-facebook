@@ -5,4 +5,4 @@
 <%= render 'form', comment: @comment %>
 
 <%= link_to 'Show', @comment %> |
-<%= link_to 'See Post', post_path(@comment.post) %>
+<%= link_to 'See Post', @comment.commentable %>

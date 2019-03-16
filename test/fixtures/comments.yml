@@ -2,15 +2,18 @@
 
 one:
   body: This is a comment
-  post: first
+  commentable: first
+  commentable_type: Post
   author: jason
 
 two:
   body: Also a comment
-  post: first
+  commentable: first
+  commentable_type: Post
   author: kirk
 
 three:
   body: Probably a comment as well
-  post: second
-  author: 
+  commentable: second
+  commentable_type: Post
+  author:

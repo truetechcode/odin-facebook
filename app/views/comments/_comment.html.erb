@@ -1,7 +1,7 @@
   <div class="comment">
     <div class="row">
       <div class="offset-md-2 col-md-2">
-        <% if author = comment.author %>
+        <% if author = comment&.author %>
           <%= link_to author do %>
             <%= gravatar_for author, size:30 %> <br>
             <small><%= author.name %></small>
@@ -9,8 +9,12 @@
         <% end %>
       </div>
       <div class="col-md-8">
-        <% if comment.new_record? %>
-          <%= provide(:submit_link, post_comments_path(@post)) %>
+        <% if comment&.new_record? %>
+          <% if @post %>
+            <%= provide(:submit_link, post_comments_path(@post)) %>
+          <% else %>
+            <%= provide(:submit_link, pic_comments_path(@pic)) %>
+          <% end %>
           <%= render 'comments/form', comment: comment %>
         <% else %>
           <%= comment.body %>

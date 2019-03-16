@@ -1,4 +1,9 @@
+<% unless @comments.nil? %>
 <%= will_paginate(@comments, inner_window: 2, outer_window:1) %>
 <%= render 'comments/comment', comment: @new_comment %>
 <%= render @comments %>
 <%= will_paginate(@comments, inner_window: 2, outer_window:1) %>
+<% else %>
+No comments yet - be the first to comment!
+<%= render 'comments/comment', comment: @new_comment %>
+<% end %>
