@@ -4,5 +4,12 @@ The challenge is to create a working facebook clone with the the underlying data
 
 I've added somethings on the way.  
 
-## Gravatars
-It turns out you can use interesting default images that vary by user and always stay the same for that user (based one email) if the user doesn't have an image.
+
+
+#Notes
+I haven't done it exactly as I would a production app as I was using it to learn / practise.  For example I think it would have been better to have Post as a wrapper for text and/or images rather than separate Post and Pic classes, but the latter approach let me play around with polymorphic classes for the comments.
+
+#Live Site
+The live site can be founnd at [Heroku](https://safe-sierra-89344.herokuapp.com/pics/1/comments).
+
+The facebook functionality probably won't work for you since it is set to sandbox mode (but the code works when I tested it.)

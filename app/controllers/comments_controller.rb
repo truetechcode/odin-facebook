@@ -20,14 +20,15 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: 'Comment was successfully created.'
     else
-      flash[:warning] = 'Comment not created'
-      #redirect_to @post
-      if @commentable.class = Post
+      flash.now[:warning] = 'Comment not created'
+      if @commentable.class == Post
+        @post = @commentable
         show_post(@comment)
-      elsif @commentable.class = Pic
+      elsif @commentable.class == Pic
+        @pic = @commentable
         show_pic(@comment)
       else
-        flash[:warning] = 'Can only create a comment for a post or pic.'
+        flash.now[:warning] = 'Can only create a comment for a post or pic.'
       end
     end
   end
